@@ -24,12 +24,6 @@ module.exports.getAllProducts = async (req,res) =>{
     try{
         const{name,price,images,category,color,size} = req.params;
         const product = await Product.find({
-        name,
-        price,
-        category,
-        color,
-        size,
-        images,
     });
     sendRes(res,product,200);
     }catch(err){

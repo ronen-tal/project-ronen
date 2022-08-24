@@ -42,7 +42,12 @@ const productSchema = new mongoose.Schema(
             enum: ['small', 'medium', 'large'],
             default: 'medium',
         },
-        image:[String],
+        images:{
+            type: [String],
+            // required: true, beacuse we have defult we dont need required
+            default: ["https://i.pinimg.com/originals/96/af/7b/96af7babdccc560c51f6837524472408.jpg"],
+
+        }
     },
 );
     

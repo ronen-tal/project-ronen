@@ -1,6 +1,7 @@
 const Product = require("../models/productModel");
 // const product = require("../models/productModel");
 const {sendRes} = require("../helpers/sendRes"); 
+const { makeFilterObject } = require("../helpers/makeFilterObject");
 
 
 module.exports.createNewProduct = async (req,res) =>{
@@ -21,11 +22,15 @@ module.exports.createNewProduct = async (req,res) =>{
 }
 
 module.exports.getAllProducts = async (req,res) =>{
+const filterObject = makeFilterObject(req.query);
+
+
     try{
-        const{name,price,images,category,color,size} = req.params;
+        // const{name,price,images,category,color,size} = req.params;
         const product = await Product.find({
     });
     sendRes(res,product,200);
     }catch(err){
         sendRes(res,err,400,true);
     }}
+

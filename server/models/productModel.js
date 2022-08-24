@@ -5,8 +5,8 @@ const productSchema = new mongoose.Schema(
         name: {
             type: String,
             required: [true, 'you must enter a product name'],
-            trim: true,
-            // minlength: [1, 'please provide non empty name'],
+            // trim: true, no need to put trim on name can do faluts 
+            minlength: [1, 'please provide non empty name'],
             maxlength: [50, "name can't be longer than 20"],
             unique: true,
         },

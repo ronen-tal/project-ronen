@@ -23,14 +23,22 @@ module.exports.createNewProduct = async (req,res) =>{
 
 module.exports.getAllProducts = async (req,res) =>{
 const filterObject = makeFilterObject(req.query);
-
-
     try{
         // const{name,price,images,category,color,size} = req.params;
-        const product = await Product.find({
-    });
+        const product = await Product.find(filterObject);
     sendRes(res,product,200);
     }catch(err){
         sendRes(res,err,400,true);
     }}
+
+
+    module.exports.deleteProduct = async (req,res) =>{
+        const {id} = req.body;
+        const del = makeFilterObject(req.query);
+        try{
+            const product = await Product.deleteOne(del);
+            sendRes(res,product,200);
+        }catch(err){
+            sendRes(res,err,400,true);
+        }}
 

@@ -20,27 +20,18 @@ const productSchema = new mongoose.Schema(
         category: {
             type: String,
             enum: {
-            values: ['Lehenga Choli', 'Jewellery', 'Saree','Sherwanis', 'general'],
+            values: ['Lehenga Choli', 'Jewellery', 'Saree','Sherwanis'],
             message:
-                    "category must be: 'Lehenga Choli', 'Jewellery', 'Saree','Sherwanis', 'general'",
+                    "category must be: 'Lehenga Choli', 'Jewellery', 'Saree','Sherwanis'",
             },
-            default: 'general',
         },
 
-        color:{
-            type: String,
-            enum: {
-                values: ['red', 'blue', 'aque','brown', 'coral pink','camo green','gray','light blue','light purpel'],
-                message:
-                "category must be: 'red', 'blue', 'aque','brown', 'coral pink','camo green','gray','light blue','light purpel'",
-                },
-                default: 'general',
-        },
-
+        color: String,
+           
         size:{
             type: String,
-            enum: ['small', 'medium', 'large'],
-            default: 'medium',
+            required:[true,'must pick size'],
+            enum: ['small', 'medium', 'large','custom'],
         },
         images:{
             type: [String],

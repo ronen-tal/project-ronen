@@ -48,7 +48,7 @@ const filterObject = makeFilterObject(req.query);
 module.exports.getProductById = async (req,res) => {
     const {id} = req.params;
     try{
-        const product = await Product.findById(id);
+        const product = await Product.find(id);
         if(!product) throw new Error ("id dose not exsit")
         sendRes(res,product,200);
     }catch(err){
@@ -60,7 +60,7 @@ module.exports.getProductById = async (req,res) => {
 module.exports.deleteProductById = async (req,res) => {
     const {id} = req.params;
     try{
-         await Product.deleteOne({_id: id});
+         await Product.findByIdAndDelete({id});
         sendRes(res,{},204); // {} empty object allow as to delete by id witout using nall
     }catch(err){
         sendRes(res,err,400,true);

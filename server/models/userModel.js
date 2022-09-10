@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { isEmail } = require('validator');
+const validator = require('validator');
 
 const userSchema = new mongoose.Schema(
     {
@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema(
             unique: [true, 'email already in use'],
             min: [6, 'please provide non empty email'],
             max: [50, 'too long email address'],
-            // validate: [validator.isEmail, 'invalid email'],
+            validate: [validator.isEmail, 'invalid email'],
         },
         active: {
             type: Boolean,

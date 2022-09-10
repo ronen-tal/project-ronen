@@ -11,10 +11,6 @@ const reviewSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
-    product: {
-        type: String,
-        required: true,
-    },
     stars: {
         type: Number,
         enum: [1, 2, 3, 4, 5],
@@ -25,10 +21,24 @@ const reviewSchema = new mongoose.Schema({
         default: Date.now(),
     },
     reviewer: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
+        ref: 'users',
         required: true,
+    },
+    product: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'products',
     },
 });
 
+reviewSchema.pre(/find/, function (next) {
+    this.populate({
+        path: 'reviewer',
+        select: 'username email',
+    });
+    next();
+});
+
 const Review = mongoose.model('reviews', reviewSchema);
+
 module.exports = Review;

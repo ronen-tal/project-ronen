@@ -1,18 +1,23 @@
-const express =require("express");
 
-const productController = require("../controllers/productController")
+const express = require('express');
+
+const productController = require('../controllers/productController');
 
 const router = express.Router();
 
-router.route("/")
+// url = "localhost:8000/products/"
+router
+.route('/')
 .get(productController.getAllProducts)
-.post(productController.createNewProduct)
-.delete(productController.deleteProduct)
+.post(productController.createNewProduct);
 
-router.route("/:id")
-.all(productController.checkValidId) // all is saved word in js 
-.get(productController.getProductById)
-.delete(productController.deleteProductById)
-.put(productController.updateProduct)
+
+// url = "localhost:8000/products/some-id"
+router
+    .route('/:id')
+    .all(productController.checkValidId)
+    .get(productController.getProductById)
+    .delete(productController.deleteProductById)
+    .put(productController.updateProduct);
 
 module.exports = router;

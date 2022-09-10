@@ -1,17 +1,18 @@
 
-module.exports.sendRes =(res,data,statusCode,isError = false) => {
-    if(!isError){
+
+module.exports.sendRes = (res, data, statusCode, isError = false) => {
+    if (!isError) {
         res.status(statusCode).json({
-            status:"succses",
+            status: 'success',
             statusCode,
             data,
-            length:data.length,
+            length: data.length,
         });
-    }else{
+    } else {
         res.status(statusCode).json({
-            status:"failure",
-            statusCode:statusCode,
-            error:data.message,
+            status: 'failure',
+            statusCode,
+            error: data.message,
         });
     }
 };

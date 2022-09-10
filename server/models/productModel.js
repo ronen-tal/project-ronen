@@ -27,20 +27,31 @@ const productSchema = new mongoose.Schema(
         },
 
         color: String,
-           
-        size:{
-            type: String,
-            required:[true,'must pick size'],
-            enum: ['small', 'medium', 'large','custom'],
-        },
+        
         images:{
             type: [String],
             // required: true, beacuse we have defult we dont need required
             default: ["https://i.pinimg.com/originals/96/af/7b/96af7babdccc560c51f6837524472408.jpg"],
 
-        }
+        },
+        size:{
+            type: String,
+            required:[true,'must pick size'],
+            enum: ['small', 'medium', 'large','custom'],
+        },
     },
+    {
+        toJSON: { virtuals: true },
+        toObject: { virtuals: true },
+    }
 );
+
+productSchema.virtual("reviews",{
+    localField: "_id",
+    foreignField:"product",
+    ref:"Review"
+});
+
     
     const Product = mongoose.model('products', productSchema);
     module.exports = Product;

@@ -18,19 +18,17 @@ const orderSchema = new mongoose.Schema(
                     ref: 'products',
                     required: true,
                 },
-                amonut: {
+                amount: {
                     type: Number,
                     required: true,
                     min: 1,
                     validate: {
-                        validator: function (val) {
-                            val = String(val);
-                            return !val.includes('.');
-                        },
-                        message: "amount can't be float",
+                    validator: function (val) {
+                        return val === Math.floor(val);
+                    },
+                     message: "amount can't be float",
                     },
                 },
-                required: true,
             },
         ],
     },
@@ -39,3 +37,6 @@ const orderSchema = new mongoose.Schema(
         toObject: { virtuals: true },
     }
 );
+
+const Order = mongoose.model('orders', orderSchema);
+module.exports = Order;

@@ -1,18 +1,35 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const dotenv = require("dotenv")
+const dotenv = require("dotenv");
+const cookieParser = require("cookie-parser");
+
+const productRouter = require("./routes/productRoutes");
+const reviewRouter = require("./routes/reviewRoutes");
+const authRouter = require("./routes/authRoutes");
+const userRouter = require("./routes/userRoutes");
+const orderRouter = require("./routes/orderRoutes");
 
 const app = express();
 
-dotenv.config({path: ".env"})
+app.use(express.json());
+app.use(cookieParser());
 
-mongoose.connect(process.env.MONGO_URI)
-.then(() => console.log("conected to Mongo"))
-.catch(err => console.log(err))// we conected to database that are inside cloude aws in mongoDB
+app.use("/auth", authRouter);
+app.use("/products", productRouter);
+app.use("/reviews", reviewRouter);
+app.use("/users", userRouter);
+app.use("/order", orderRouter);
 
-const port = process.env.PORT
-const url = process.env.SERVER_URL
+dotenv.config({ path: ".env" });
 
-app.listen(port, url, ()=>{
-    console.log(`listening on ${url}:${port}`)
-})
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log("connected to mongo"))
+  .catch((err) => console.log(err));
+
+const port = process.env.PORT;
+const url = process.env.SERVER_URL;
+
+app.listen(port, url, () => {
+  console.log(`listening on ${url}:${port}`);
+});

@@ -1,9 +1,6 @@
-const mongoose = require("mongoose");
-
-
-const Product = require("../models/reviewModel");
-const {sendRes} = require("../helpers/sendRes"); 
-// const { makeFilterObject } = require("../helpers/makeFilterObject");
+const Review = require('../models/reviewModel');
+const Product = require('../models/productModel');
+const { sendRes } = require('../helpers/sendRes');
 
 module.exports.checkIfProductExist = async (req, res, next) => {
     try {
